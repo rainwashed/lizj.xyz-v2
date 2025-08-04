@@ -1,103 +1,58 @@
+import { Button } from "@/components/ui/button";
+import { SiGithub, SiGmail, SiXdadevelopers, SiYoutube } from "@icons-pack/react-simple-icons";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
+import Link from "next/link";
 import Image from "next/image";
+import React, { PropsWithChildren } from "react";
+import { Badge } from "@/components/ui/badge";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const IconLinkButton: React.FC<PropsWithChildren<{
+  href: string;
+  platform: string;
+}>> = (props) => <HoverCard>
+  <HoverCardTrigger asChild>
+    <Link href={props.href} target="_blank" className="inline-block">
+      <Button variant="outline" size="icon" className="cursor-pointer">
+        {props.children}
+      </Button>
+    </Link>
+  </HoverCardTrigger>
+  <HoverCardContent className="px-2 py-1 text-xs w-fit">
+    {props.platform}
+  </HoverCardContent>
+</HoverCard>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+const Component = () => <>
+  <div className="flex flex-col items-center justify-center w-screen h-screen">
+    <span className="mb-5 rounded-full shadow-lg size-48">
+      <Image src="https://github.com/rainwashed.png" alt="GitHub avatar" className="!relative rounded-full" fill priority />
+    </span>
+    <div className="flex flex-col justify-center p-4 space-y-2 border rounded-sm shadow-lg w-fit border-primary/10">
+      <h1 className="text-3xl md:text-5xl font-(family-name:--font-noto-sans-sc) font-semibold text-center">你好. <span className="font-sans">I am </span>李.</h1>
+      <span className="inline-flex items-center justify-center space-x-1">
+        <Badge variant="outline">
+          Developer
+        </Badge>
+        <Badge variant="outline">
+          Creator
+        </Badge>
+        <Badge variant="outline">
+          Learner
+        </Badge>
+      </span>
+      <span className="inline-flex items-center justify-center w-full space-x-2 font-light">
+        <IconLinkButton href="https://github.com/rainwashed" platform="GitHub">
+          <SiGithub />
+        </IconLinkButton>
+        <IconLinkButton href="https://youtube.com/@rainwashedz" platform="YouTube">
+          <SiYoutube />
+        </IconLinkButton>
+        <IconLinkButton href="mailto:li@lizj.xyz" platform="Email">
+          <SiGmail />
+        </IconLinkButton>
+      </span>
     </div>
-  );
-}
+  </div>
+</>
+
+export default Component;
