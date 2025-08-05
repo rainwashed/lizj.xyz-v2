@@ -5,6 +5,7 @@ import { SmoothScroller } from "@/components/smooth-scroller";
 import Footer from "@/components/footer";
 import NavigationBar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import PageTransition from "@/components/page-transition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,12 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${notoSansChinese.variable} antialiased overflow-x-hidden`}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SmoothScroller />
-          {/* <NavigationBar /> */}
+          <NavigationBar />
+          {/* <PageTransition> */}
           {children}
+          {/* </PageTransition> */}
           <Footer />
-
         </ThemeProvider>
       </body>
     </html>
