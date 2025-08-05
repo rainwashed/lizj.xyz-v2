@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 
 const notoSansChinese = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
+  subsets: ["latin"]
 });
 
 export const metadata: Metadata = {
