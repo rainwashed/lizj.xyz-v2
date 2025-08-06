@@ -29,9 +29,9 @@ const Component = () => {
     return (
         <NavigationMenu
             className={`fixed top-4 left-1/2 -translate-x-1/2 md:translate-none md:left-[calc(100vw-20rem)] z-50 border rounded-md border-foreground/20 ${scrollValue
-                ? "opacity-100 pointer-events-auto"
-                : "opacity-0 pointer-events-none"
-                } transition-opacity w-fit backdrop-blur-3xl`}
+                ? "opacity-100"
+                : "opacity-0"
+                } transition-opacity w-fit backdrop-blur-3xl hover:opacity-100 duration-300`}
         >
             <NavigationMenuList>
                 <NavigationMenuItem>

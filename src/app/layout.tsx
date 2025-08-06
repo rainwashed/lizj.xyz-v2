@@ -5,6 +5,7 @@ import { SmoothScroller } from "@/components/smooth-scroller";
 import Footer from "@/components/footer";
 import NavigationBar from "@/components/navbar";
 import { ThemeProvider } from "@/components/theme-provider";
+import SpaceBackground from "@/components/spacebackground";
 import PageTransition from "@/components/page-transition";
 
 const geistSans = Geist({
