@@ -2,7 +2,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
     Card,
-    CardAction,
     CardContent,
     CardDescription,
     CardFooter,
@@ -293,70 +292,111 @@ const contributions: ContributionProject[] = [
     },
 ];
 
+const ActionButtons = ({ actions }: { actions?: Action[] }) => (
+    <CardFooter className="mt-auto flex flex-wrap gap-2">
+        {actions?.map((action, i) => (
+            <Button
+                key={i}
+                asChild
+                variant="outline"
+                size="sm"
+                className="h-auto min-h-8 whitespace-normal px-3 py-2 text-left"
+            >
+                <Link href={action.href} target="_blank" rel="noreferrer noopener">
+                    <Icon icon={action.iconifyIcon} className="size-4 shrink-0" />
+                    <span>{action.text}</span>
+                </Link>
+            </Button>
+        ))}
+    </CardFooter>
+);
+
 const Component = () => {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen py-10">
-            <div className="h-20"></div>
-            <div className="container w-full max-w-4xl px-4">
-                <section className="mb-8">
-                    <h1 className="mb-4 text-3xl font-semibold">My own projects:</h1>
-                    <div className="grid gap-4 md:grid-cols-2">
+        <div className="relative isolate overflow-hidden">
+            <div
+                aria-hidden
+                className="bg-dot-grid mask-fade-bottom pointer-events-none absolute inset-x-0 top-0 -z-10 h-[52rem]"
+            />
+            <main className="mx-auto flex w-full max-w-4xl flex-col gap-20 px-4 py-28 sm:px-6 md:py-32">
+                {/* Personal projects */}
+                <section>
+                    <div className="mb-8 flex items-center gap-4">
+                        <h1 className="text-2xl font-semibold tracking-tight whitespace-nowrap sm:text-3xl">
+                            My own projects:
+                        </h1>
+                        <span aria-hidden className="h-px flex-1 bg-foreground/10" />
+                    </div>
+                    <div className="grid gap-5 md:grid-cols-2">
                         {personalProjects.map((project, i) => (
-                            <Card key={i} className="w-full">
-                                <CardHeader>
-                                    <CardTitle className="text-lg font-medium">{project.projectName}</CardTitle>
-                                    <CardDescription className="space-x-1 space-y-1">
+                            <Card
+                                key={i}
+                                className="group h-full gap-4 rounded-2xl border-foreground/10 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-xl hover:shadow-foreground/5"
+                            >
+                                <CardHeader className="gap-3">
+                                    <CardTitle className="text-lg font-semibold tracking-tight">
+                                        {project.projectName}
+                                    </CardTitle>
+                                    <div className="flex flex-wrap gap-1.5">
                                         {project.tags.map((tag, i2) => (
-                                            <Badge key={i2} variant="secondary">{tag}</Badge>
+                                            <Badge
+                                                key={i2}
+                                                variant="secondary"
+                                                className="rounded-full text-xs font-normal tracking-wide"
+                                            >
+                                                {tag}
+                                            </Badge>
                                         ))}
-                                    </CardDescription>
+                                    </div>
                                 </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">{project.projectDescription}</p>
+                                <CardContent className="flex-1">
+                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                        {project.projectDescription}
+                                    </p>
                                 </CardContent>
-                                <CardFooter className="flex flex-col flex-wrap gap-2 sm:flex-row">
-                                    {project.actions?.map((action, i3) => (
-                                        <Link key={i3} href={action.href} target="_blank">
-                                            <Button variant="outline" size="sm" className="whitespace-normal">
-                                                <Icon icon={action.iconifyIcon} className="w-4 h-4 mr-2" />
-                                                <span>{action.text}</span>
-                                            </Button>
-                                        </Link>
-                                    ))}
-                                </CardFooter>
+                                <ActionButtons actions={project.actions} />
                             </Card>
                         ))}
                     </div>
                 </section>
 
+                {/* Open-source contributions */}
                 <section>
-                    <h1 className="mb-4 text-3xl font-semibold">My open-source contributions:</h1>
-                    <div className="grid gap-4 md:grid-cols-2">
+                    <div className="mb-8 flex items-center gap-4">
+                        <h1 className="text-2xl font-semibold tracking-tight whitespace-nowrap sm:text-3xl">
+                            My open-source contributions:
+                        </h1>
+                        <span aria-hidden className="h-px flex-1 bg-foreground/10" />
+                    </div>
+                    <div className="grid gap-5 md:grid-cols-2">
                         {contributions.map((contribution, i) => (
-                            <Card key={i} className="w-full">
-                                <CardHeader>
-                                    <CardTitle className="text-lg font-medium">{contribution.projectName} - <span className="text-sm text-yellow-500">{contribution.projectStarCount} ⭐</span></CardTitle>
-                                    <CardDescription className="text-sm text-muted-foreground">{contribution.projectDescription}</CardDescription>
+                            <Card
+                                key={i}
+                                className="group h-full gap-4 rounded-2xl border-foreground/10 transition-all duration-300 hover:-translate-y-1 hover:border-foreground/25 hover:shadow-xl hover:shadow-foreground/5"
+                            >
+                                <CardHeader className="gap-3">
+                                    <CardTitle className="flex flex-wrap items-baseline gap-x-2 text-lg font-semibold tracking-tight">
+                                        {contribution.projectName}
+                                        <span className="text-muted-foreground">-</span>
+                                        <span className="inline-flex items-center gap-1 text-sm font-normal text-foreground/75">
+                                            {contribution.projectStarCount} ⭐
+                                        </span>
+                                    </CardTitle>
+                                    <CardDescription className="text-sm leading-relaxed">
+                                        {contribution.projectDescription}
+                                    </CardDescription>
                                 </CardHeader>
-                                <CardContent>
-                                    <p className="text-sm text-muted-foreground">{contribution.personalContributionDescription}</p>
+                                <CardContent className="flex-1">
+                                    <p className="text-sm leading-relaxed text-muted-foreground">
+                                        {contribution.personalContributionDescription}
+                                    </p>
                                 </CardContent>
-                                <CardFooter className="flex flex-col flex-wrap gap-2 sm:flex-row">
-                                    {contribution.actions?.map((action, i3) => (
-                                        <Link key={i3} href={action.href} target="_blank">
-                                            <Button variant="outline" size="sm" className="whitespace-normal">
-                                                <Icon icon={action.iconifyIcon} className="w-4 h-4 mr-2" />
-                                                <span>{action.text}</span>
-                                            </Button>
-                                        </Link>
-                                    ))}
-                                </CardFooter>
+                                <ActionButtons actions={contribution.actions} />
                             </Card>
                         ))}
                     </div>
                 </section>
-            </div>
-            <div className="h-20"></div>
+            </main>
         </div>
     );
 };

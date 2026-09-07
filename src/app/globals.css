@@ -112,6 +112,45 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+@utility bg-dot-grid {
+  background-image: radial-gradient(
+    circle at center,
+    color-mix(in oklab, var(--color-foreground) 9%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+@utility bg-line-grid {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 44px 44px;
+}
+
+@utility bg-glow-top {
+  background-image: radial-gradient(
+    70% 45% at 50% 0%,
+    color-mix(in oklab, var(--color-foreground) 6%, transparent) 0%,
+    transparent 70%
+  );
+}
+
+@utility mask-fade-radial {
+  mask-image: radial-gradient(ellipse at center, black 35%, transparent 78%);
+}
+
+@utility mask-fade-bottom {
+  mask-image: linear-gradient(to bottom, black 45%, transparent 92%);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -119,5 +158,10 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    background-color: var(--foreground);
+    color: var(--background);
   }
 }
