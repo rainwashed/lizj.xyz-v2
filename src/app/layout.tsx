@@ -19,6 +19,7 @@ const geistMono = Geist_Mono({
 
 const notoSansChinese = Noto_Sans_SC({
   variable: "--font-noto-sans-sc",
+  preload: false,
 });
 
 export const metadata: Metadata = {
@@ -39,9 +40,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SmoothScroller />
           <NavigationBar />
-          {/* <PageTransition> */}
+           <PageTransition>
           {children}
-          {/* </PageTransition> */}
+           </PageTransition>
           <Footer />
         </ThemeProvider>
       </body>
